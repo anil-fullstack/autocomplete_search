@@ -1,0 +1,50 @@
+/* src/Autocomplete.css */
+.autocomplete_wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 600px;
+  margin: 0px auto;
+
+  .input_search {
+    width: 100%;
+    padding: 10px 24px;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 500;
+    color: #fcfcfc;
+    box-sizing: border-box;
+    background-color: #1a1a1a;
+    border: 2px solid #f0f0f0;
+    border-radius: 30px;
+  }
+
+  .suggestions {
+    position: absolute;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #f0f0f0;
+    z-index: 1000;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 12px;
+    color: #282828;
+  }
+
+  .suggestions li {
+    padding: 10px 20px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #a1a0a0;
+    }
+  }
+
+  .no-suggestions {
+    color: #999;
+    background-color: #f0f0f0;
+    padding: 8px 20px;
+    border-radius: 12px;
+  }
+}

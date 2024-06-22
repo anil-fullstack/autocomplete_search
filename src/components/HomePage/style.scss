@@ -1,0 +1,46 @@
+.result_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 40px;
+
+  .card_wrap {
+    border-radius: 12px;
+    box-sizing: border-box;
+    border: 1px solid #fff;
+    color: #000;
+    flex: 1 0 calc(25% - 24px);
+    background-color: #f0f0f0;
+    padding: 20px;
+
+    .title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: justify;
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+    }
+    .desc {
+      font-size: 14px;
+      font-weight: 400;
+      margin-bottom: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      text-align: justify;
+      display: -webkit-box;
+      -webkit-line-clamp: 6;
+      -webkit-box-orient: vertical;
+    }
+    .author {
+      margin-top: auto;
+      font-size: 16px;
+      font-weight: 500;
+    }
+  }
+}

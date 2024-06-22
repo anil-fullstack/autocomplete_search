@@ -1,0 +1,21 @@
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+  height: 250px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.85);
+  z-index: 2;
+  background-color: #fff;
+}
+
+body {
+  background-color: #1a1a1a;
+  padding: 30px 60px;
+  position: relative;
+  font-family: "Poppins", sans-serif;
+}
