@@ -9,32 +9,44 @@
   .card_wrap {
     border-radius: 12px;
     box-sizing: border-box;
-    border: 1px solid #fff;
-    color: #000;
+    color: #2d2a2a;
     flex: 1 0 calc(25% - 24px);
-    background-color: #f0f0f0;
     padding: 20px;
-    transition: transform 0.3s;
+    transition: transform 0.5s;
     &:hover {
-      transform: scale(1.04, 1.25);
+      transform: scale(1.04, 1.15);
       z-index: 2;
-      background-color: #000;
-      color: #fff;
+    }
+
+    &:nth-of-type(3n) {
+      background: linear-gradient(to bottom, #63e9ac, #0ec4a0);
+      box-shadow: 0 0 20px #0ec4a087;
+    }
+
+    &:nth-of-type(3n + 1) {
+      background: linear-gradient(to bottom, #4cdafe, #178ff9);
+      box-shadow: 0 0 20px #178ff985;
+    }
+
+    &:nth-of-type(3n + 2) {
+      background: linear-gradient(to bottom, #60afff, #3663fa);
+      box-shadow: 0 0 20px #60afff81;
     }
 
     .title {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
       margin-bottom: 10px;
       overflow: hidden;
       text-overflow: ellipsis;
-      text-align: justify;
+      text-align: left;
       display: -webkit-box;
       -webkit-line-clamp: 1;
       -webkit-box-orient: vertical;
     }
     .desc {
       font-size: 14px;
+      line-height: 18px;
       font-weight: 400;
       margin-bottom: 10px;
       overflow: hidden;
@@ -50,4 +62,15 @@
       font-weight: 500;
     }
   }
+}
+
+.no_result {
+  margin: auto;
+  margin-top: calc(50dvh - 64px - 120px);
+  font-size: 32px;
+  letter-spacing: 0.2px;
+  background: linear-gradient(to bottom, #60afff, #3663fa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
 }

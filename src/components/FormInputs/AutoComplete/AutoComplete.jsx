@@ -1,12 +1,17 @@
 // src/Autocomplete.js
 import React, { useEffect, useRef, useState } from "react";
 import "./style.scss";
+import { debounce } from "../../../utils/common";
 
 const Autocomplete = ({ suggestions, setSelectedCard }) => {
   const autocompleteRef = useRef(null);
   const [query, setQuery] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const debouncedFunction = debounce((newQuery) => {
+    setFilteredSuggestions(newQuery);
+  }, 500);
 
   const handleChange = (e) => {
     const userInput = e.target.value;
@@ -23,9 +28,12 @@ const Autocomplete = ({ suggestions, setSelectedCard }) => {
     });
 
     setQuery(userInput);
-    setFilteredSuggestions(filtered);
-    setShowSuggestions(true);
+    debouncedFunction(filtered);
   };
+
+  useEffect(() => {
+    if (filteredSuggestions.length > 0) setShowSuggestions(true);
+  }, [filteredSuggestions]);
 
   const handleClick = (val) => {
     setQuery("");
@@ -61,10 +69,44 @@ const Autocomplete = ({ suggestions, setSelectedCard }) => {
   }, []);
 
   const SuggestionsListComponent = () => {
+    const [page, setPage] = useState(1);
+    const [isScrollLoading, setLoadingScrollData] = useState("");
+    const listRef = useRef(null);
+    const totalPages = Math.ceil(filteredSuggestions?.length / 10);
+
+    useEffect(() => {
+      const handleScroll = () => {
+        const list = listRef.current;
+        if (list && list.scrollTop + list.clientHeight >= list.scrollHeight) {
+          loadMoreSuggestions();
+        }
+      };
+
+      const list = listRef.current;
+      if (list) {
+        list.addEventListener("scroll", handleScroll);
+      }
+      return () => {
+        if (list) {
+          list.removeEventListener("scroll", handleScroll);
+        }
+      };
+    }, [page]);
+
+    const loadMoreSuggestions = async () => {
+      if (page <= totalPages) {
+        setLoadingScrollData("Loading...");
+        setTimeout(() => {
+          setPage(page + 1);
+          setLoadingScrollData("");
+        }, 2000);
+      }
+    };
+
     return filteredSuggestions.length ? (
-      <ul className="suggestions">
-        {filteredSuggestions.map((suggestion, index) => {
-          let className = "";
+      <ul className="suggestions" ref={listRef}>
+        {filteredSuggestions.slice(0, page * 10).map((suggestion, index) => {
+          let className = "select_list";
 
           return (
             <li
@@ -76,6 +118,9 @@ const Autocomplete = ({ suggestions, setSelectedCard }) => {
             </li>
           );
         })}
+        {isScrollLoading && (
+          <li className="scroll_loading">{isScrollLoading}</li>
+        )}
       </ul>
     ) : (
       <div className="no-suggestions">
